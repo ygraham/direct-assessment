@@ -1,6 +1,4 @@
 # direct-assessment
-Direct Assesment for Human Evaluation of MT
-# direct-assessment
 Crowd-sourcing Direct Assessment Segment-level MT Evaluations
 
 Instructions for Direct Assessment : Crowd-sourcing Segment-level Evaluations of MT output
