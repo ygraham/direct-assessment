@@ -35,6 +35,8 @@ creating the files needed to run HITs and one for post-processing HITs.
 To prepare the files for MTurk, go to folder "./prep-hits" and follow
 the instructions below.
 
+You need to downkload "arial.ttf" and place in ./prep-hits directory.
+
 The following folder contains an example of how set-up expects text files
 containing translations and reference translations to be located and named:
 
