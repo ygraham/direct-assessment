@@ -1,0 +1,31 @@
+You will be shown:
+
+  - a "reference" segment of text;
+  - a corresponding "hypothesis" segment of text.
+
+There are three parts to each annotation:
+
+(1) Read the reference segment;
+
+(2) Read the hypothesis segment and compare its meaning to the meaning
+of the reference sentence;
+
+(3) **Making as few changes as possible**, correct the hypothesis
+segment to make it
+  (a) have the same meaning as the reference segment;
+  (b) grammatically correct.
+
+You will need to use your own judgment on occasion to determine whether
+or not a change to the hypothesis is really needed. What I would like you
+to do is to ask yourself the following question:
+
+  "Is the change I am thinking of making going to make any *practical*
+  difference to the meaning of the hypothesis?"
+
+If the answer is "no" or "probably not", then do not make the change.
+
+With respect to grammaticallity, the annotation requires you to
+wear your layperson hat as opposed to your linguist hat.
+
+Please try to avoid spending a lot of time on any one sentence -- intuitive,
+sensible judgments are preferred to nit-picking or getting bogged down.
