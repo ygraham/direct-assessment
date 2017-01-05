@@ -119,4 +119,77 @@ You'll be prompted to upload a csv file. Upload the following file:
 After HIT completion:
 ------------------------------------------------------------------------------
 
-... under construction 
+Go to directory
+
+    ../proc-hits
+
+Download the batch file of hits from MTurk and place in folder:
+
+    ./batched-hits
+
+The files should be named, e.g.:
+
+    ./batched-hits/Batch_1234_batch_results.csv
+
+Run the following command:
+
+    bash proc-hits-step1.sh > out/step1
+
+This creates some files in fold "./analysis". To find out which
+workers have been flagged as possibly gaming the system type
+the following:
+
+    grep flag analysis/ad-wrkr-stats.csv
+
+There are 4 ways a worker can be flagged, here's how to interpret:
+
+    flag(scrs) : very close mean scores for badref / genuine system output / ref items
+    flag(time) : very short time taken to complete at least one hit
+    flag(seq)  : the worker gave constant ratings for a long sequence of translations at least once within a hit
+    flag(rej)  : hits from this worker have previously been rejected
+
+It is ultimately up to the individual researcher to decide which hits to
+reject however.
+
+Next, standardize the scores to remove differences in individual worker
+scoring strategies:
+
+    bash standardize-scrs.sh cs en > out/step2
+
+When you have collected a minimum of 15 repeat assessments per segment,
+compute mean scores per segment. The minimum sample size of repeat
+assessments per segment is set to 15 and the script only produces scores
+for segments with at least that number of repeat assessments. To compute
+mean scores:
+
+    bash score-segs-strict-unique.sh cs en > out/step3
+
+This creates two files, one containing mean scores computed for segments
+computed from raw scores provided by workers. The other is when scores
+are standardized per worker mean and standard deviation of their overall
+score distribution:
+
+    ./analysis/ad-raw-seg-scores-1.es-en.csv
+    ./analysis/ad-stnd-seg-scores-1.es-en.csv
+
+The format in final scores files is as follows:
+
+HIT N SID SYS SCR
+H0 17 65 uedin-nmt 36.3088235294118
+
+HIT: An id number used to identify hits to post on MTurk only
+
+N: number of judgments combined to get the mean score for this segment (should be at least 15)
+
+SID: the original sentence line number (one-based) in the input file
+      (e.g. ../prep-hits/data/newstest2016/cs-en/newstest2016.cs-en.uedin-nmt)
+
+SYS: Name of the system
+
+SCR: Final DA score for the segment
+
+Now you can compute correlations between these segment-level
+scores and metric scores for evaluation of segment-level metrics.
+
+... any questions, please contact graham.yvette@gmail.com
+
