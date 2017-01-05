@@ -20,21 +20,13 @@ function die() { echo "$@" >&2; exit 1; }
 set -o pipefail  # safer pipes
 set -e # die on any error
 
-rdir=batched-hits
+
+src=$1
+trg=$2
 wdir=analysis
 
-mkdir $wdir
+R --no-save --args ad $src $trg $wdir < trk-mean-sd.R
+perl standardize-scrs.pl $wdir/ad-$src$trg-trk-mean-sd.txt $src $trg < $wdir/ad-good-raw.csv > $wdir/ad-$src$trg-good-stnd.csv
 
-perl hits2r.pl ad $rdir $wdir > $wdir/ad-latest.csv
-wc -l $wdir/ad-latest.csv
 
-R --no-save --args $wdir ad < concurrent-hits.R
-R --no-save --args $wdir ad < wrkr-times.R
-perl filter-rejected.pl $wdir/ad-wrkr-stats.csv < $wdir/ad-latest.csv > $wdir/ad-approved.csv
-python repeats.py $wdir/ad-approved.csv > $wdir/ad-repeats.csv
-R --no-save --args $wdir < quality-control.R
-perl raw-bad-ref-pval-2-csv.pl < $wdir/ad-trk-stats.txt > $wdir/ad-trk-stats.csv
-perl filter-pval-paired.pl < $wdir/ad-trk-stats.csv > $wdir/ad-trk-stats.class
-perl filter-latest.pl ad $wdir/ad-trk-stats.class < $wdir/ad-approved.csv > $wdir/ad-good-raw.csv
-python repeats.py $wdir/ad-good-raw.csv > $wdir/ad-good-raw-repeats.csv
 

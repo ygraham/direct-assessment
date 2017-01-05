@@ -20,21 +20,16 @@ function die() { echo "$@" >&2; exit 1; }
 set -o pipefail  # safer pipes
 set -e # die on any error
 
-rdir=batched-hits
-wdir=analysis
+DIR=analysis
+ITEM=ad
+SRC=$1
+TRG=$2
+MIN_N=1
 
-mkdir $wdir
-
-perl hits2r.pl ad $rdir $wdir > $wdir/ad-latest.csv
-wc -l $wdir/ad-latest.csv
-
-R --no-save --args $wdir ad < concurrent-hits.R
-R --no-save --args $wdir ad < wrkr-times.R
-perl filter-rejected.pl $wdir/ad-wrkr-stats.csv < $wdir/ad-latest.csv > $wdir/ad-approved.csv
-python repeats.py $wdir/ad-approved.csv > $wdir/ad-repeats.csv
-R --no-save --args $wdir < quality-control.R
-perl raw-bad-ref-pval-2-csv.pl < $wdir/ad-trk-stats.txt > $wdir/ad-trk-stats.csv
-perl filter-pval-paired.pl < $wdir/ad-trk-stats.csv > $wdir/ad-trk-stats.class
-perl filter-latest.pl ad $wdir/ad-trk-stats.class < $wdir/ad-approved.csv > $wdir/ad-good-raw.csv
-python repeats.py $wdir/ad-good-raw.csv > $wdir/ad-good-raw-repeats.csv
+STND=stnd;
+R --no-save --args $DIR $ITEM $STND $SRC $TRG < wrkr-score-segs.R
+R --no-save --args $DIR $ITEM $STND $SRC $TRG $MIN_N < score-segs-strict-unique.R
+STND=raw
+R --no-save --args $DIR $ITEM $STND $SRC $TRG < wrkr-score-segs.R
+R --no-save --args $DIR $ITEM $STND $SRC $TRG $MIN_N < score-segs-strict-unique.R
 
