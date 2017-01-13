@@ -23,7 +23,7 @@ set -e # die on any error
 rdir=batched-hits
 wdir=analysis
 
-mkdir $wdir
+mkdir -p $wdir
 
 perl hits2r.pl ad $rdir $wdir > $wdir/ad-latest.csv
 wc -l $wdir/ad-latest.csv
