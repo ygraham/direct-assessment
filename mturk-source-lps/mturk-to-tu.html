@@ -1,12 +1,13 @@
 <!-- 
-Title: Deutsche Textbedeutung  (einzig Deutsch als Muttersprache bitte)
-Description: Bewerten Sie die Bedeutungsgleichheit einiger Textstücke in deutscher Sprache
-Keywords: deutsche text bedeutung bewerten
+Title: Türkçe Metin Anlamı (Sadece anadili Türkçe katılımcılar)
+Description: Bazı Türkçe metin parçalarının anlamını değerlendirin.
+Keywords: Türkçe metin anlam değerlendirmek 
 Time allotted: 90 minutes 
 Masters? No
 Hit Approval greater than 95
 Public
 -->
+
 <script type='text/javascript'>
 window.onload = function() {
   document.getElementById('submitButton').setAttribute('onclick', 'return validateForm()');     
@@ -135,17 +136,17 @@ window.onload = function() {
         <tbody>
           <tr>
             <td id="done">
-            <p>Dieser HIT besteht aus 100 Tests f&uuml;r die Deutsche Sprache. Sie haben bisher 0 Tests abgegeben.</p>
+            <p>Bu HIT 100 Türkçe değerlendirmeden oluşuyor. Siz 0 tanesini tamamladınız.</p>
             </td>
           </tr>
           <tr>
             <td colspan="2">
-            <p>Lesen Sie bitte den untenstehenden Text und geben sie an, wie fest sie der Aussage zustimmen:</p>
+            <p>Read the text below. How much do you agree with the following statement:</p>
             </td>
           </tr>
           <tr>
             <td align="center" id="rate">
-            <p><b>Der schwarze Text dr&uuml;ckt die Bedeutung des grauen Texts in deutscher Sprache angemessen aus.</b></p>
+            <p><b>The black text adequately expresses the meaning of the gray text in English.</b></p>
             </td>
           </tr>
           <tr>
@@ -250,7 +251,7 @@ var img = img_dir+rid.substring(0,4)+"/"+rid+".png";
 
 document.getElementById("question_pic").src = img;
 document.getElementById("ref_pic").src = ref_img;  
-document.getElementById('done').innerHTML = "Dieser HIT besteht aus 100 Tests für die Deutsche Sprache. Sie haben bisher "+index+" Tests abgegeben.";
+document.getElementById('done').innerHTML = "This HIT consists of 100 English assessments. You have completed "+index+".";
   
 function nextQuestion(){
 
@@ -274,7 +275,7 @@ function nextQuestion(){
   var ref_img = ref_dir+sid+".png";  
   var img = img_dir+rid.substring(0,4)+"/"+rid+".png";
   
-  document.getElementById('done').innerHTML = "<span style='font-family: Arial;'>Dieser HIT besteht aus 100 Tests für die Deutsche Sprache. Sie haben bisher "+index+" Tests abgegeben.</span>";
+  document.getElementById('done').innerHTML = "<span style='font-family: Arial;'>This HIT consists of 100 English assessments. You have completed "+index+".</span>";
   document.getElementById("question_pic").src=img;
   document.getElementById("ref_pic").src=ref_img;
   
@@ -283,7 +284,7 @@ function nextQuestion(){
   if( index == rids.length ){
   
     document.getElementById('final_answer').value = ""+ans;
-    document.getElementById("main_table").innerHTML = "<tbody><div><p>Sie haben 100 Tests abgegeben.</p> <p>Bitte drücken sie den untenstehenden <b>\"Submit\"</b> Knopf, um den HIT einzusenden. Besten Dank für Ihre Mitarbeit.</p> <p>Wenn Sie möchten, können sie hier Feedback abgeben:</p></div><textarea name=\"comments\" cols=110 rows=10></textarea></tbody>" 
+    document.getElementById("main_table").innerHTML = "<tbody><div><p>You have completed Has all 100 assessments.</p> <p> Please press the <b>\"Submit\"</b> button below to submit the HIT. Thank you for your participation.</p> <p>You can leave feedback here if you wish:</p></div><textarea name=\"comments\" cols=110 rows=10></textarea></tbody>" 
     document.getElementById('other_table').innerHTML = "";
     document.getElementById('slider_table').innerHTML = "";
   //document.getElementById("submitButton").disabled = false;
@@ -294,7 +295,7 @@ function validateForm(){
   if( index == 100 ){
      return true;
   }else{
-     alert("Drücken Sie \"Next\"");
+     alert("Press \"Next\"");
      return false;
   }
 }
